@@ -10,5 +10,6 @@ const clienteController = require('./clienteController');
 
 router.get('/clientes', clienteController.listaClientes);
 
-
+router.get('/clientes/:cpf',clienteController.buscarCliente);
+ 
 module.exports = router;
