@@ -62,7 +62,7 @@ exports.adicionarCliente = (req, res) => {
             login,
             senha: hash
         };
-        db.query('INSERT INTO cliente SET ?', novoCliente, (err, result) => {
+        db.query('INSERT INTO cliente SET = ?', novoCliente, (err, result) => {
             if (err) {
                 console.error('Erro ao adicionar cliente:', err);
                 res.status(500).json({ error: 'Erro interno do servidor' });
