@@ -14,6 +14,8 @@ const produtoController = require('./produtoController');
 
 const pedidoController = require('./pedidoController');
 
+const itemController = require('./itemController');
+
 router.get('/clientes', loginController.autenticarToken, clienteController.listaClientes);
 
 router.get('/clientes/:cpf', loginController.autenticarToken, clienteController.buscarCliente);
@@ -49,5 +51,21 @@ router.post('/pedido',pedidoController.adicionarPedido)
 router.patch('/pedido',pedidoController.atualizarPedido)
 
 router.patch('/pedido',pedidoController.deletarPedido)
+
+router.use('/item',loginController.autenticarToken)
+
+router.get('/item',itemController.listaItemPedido)
+
+router.get('/item/:id_item',itemController.buscarItem)
+
+router.get('/item/pedido/:id_pedido',itemController.buscarItemPedido)
+
+router.get('/item/produto/:id_produto',itemController.buscarItemProduto)
+
+router.post('/item',itemController.adicionarItem_Pedido)
+
+router.patch('/item',itemController.Atualizaritem_Pedido)
+
+router.delete('/item',itemController.deletarItem)
 
 module.exports = router;

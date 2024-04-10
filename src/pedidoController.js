@@ -56,11 +56,11 @@ exports.adicionarPedido = (req, res) => {
     }
     db.query('INSERT INTO produto SET = ?', novoPedido, (err, result) => {
         if (err) {
-            console.error('Errro ao adicionar produto:', err);
+            console.error('Erro ao adicionar produto:', err);
             res.status(500).json({ error: 'Erro interno do servidor' });
             return;
         };
-        res, json({ message: 'pedido adicionado com sucesso' })
+        res.json({ message: 'pedido adicionado com sucesso' })
     })
 }
 
