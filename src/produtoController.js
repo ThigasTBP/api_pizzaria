@@ -2,10 +2,11 @@ const db = require('./db')
 const joi = require('joi')
 
 const produtoSchema = joi.object({
+    id_produto: joi.string().required(),
     nome_produto: joi.string().required(),
     descricao: joi.string().required(),
     valor_unitario: joi.string().required(),
-    imagem: joi.string()
+    imagem: joi.string().required()
 })
 
 exports.listaProduto = (req, res) => {
@@ -34,9 +35,9 @@ exports.buscarProdutoID = (req, res) => {
         res.json(result[0])
     })
 };
-exports.buscaProduto = (req, res) => {
+exports.buscarProdutoNome = (req, res) => {
     const { nome_produto } = req.params;
-    db.query('SELECT * FROM produto WHERE nome_produto LIKE ?', [`${nome_produto}%`], (err, result) => {
+    db.query('SELECT * FROM produto WHERE nome_produto LIKE ?', [`%${nome_produto}%`], (err, result) => {
         if (err) {
             console.error('Erro ao buscar produto:', err);
             res.status(500).json({ error: 'Erro interno do servidor' })
@@ -51,20 +52,21 @@ exports.buscaProduto = (req, res) => {
 };
 
 exports.adicionarProduto = (req, res) => {
-    const { nome_produto, descricao, valor_unitario, imagem } = req.body;
-    const { error } = produtoSchema.validate({ nome_produto, descricao, valor_unitario, imagem })
+    const { id_produto, nome_produto, descricao, valor_unitario, imagem } = req.body;
+    const { error } = produtoSchema.validate({ id_produto, nome_produto, descricao, valor_unitario, imagem })
 
     if (error) {
         res.status(400).json({ error: 'Dados de produto inválidos' });
         return
     }
     const novoProduto = {
+        id_produto,
         nome_produto,
         descricao,
         valor_unitario,
         imagem
     }
-    db.query('INSERT INTO produto SET = ?', novoProduto, (err, result) => {
+    db.query('INSERT INTO produto SET ?', novoProduto, (err, result) => {
         if (err) {
             console.error('Erro ao adicionar produto:', err);
             res.status(500).json({ error: 'Erro interno do servidor' });

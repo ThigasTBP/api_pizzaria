@@ -32,9 +32,9 @@ router.get('/produto', produtoController.listaProduto)
 
 router.get('/produto/:id_produto',produtoController.buscarProdutoID)
 
-router.get('/produto/nome/:nome_produto', produtoController.buscaProduto)
+router.get('/produto/nome/:nome_produto', produtoController.buscarProdutoNome)
 
-router.post('/produto',loginController.autenticarToken,produtoController.adicionarProduto)
+router.post('/produto',produtoController.adicionarProduto)
 
 router.delete('/produto/:id_produto',loginController.autenticarToken,produtoController.deletarProduto)
 

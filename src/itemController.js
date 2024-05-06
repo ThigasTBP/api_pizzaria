@@ -70,7 +70,7 @@ exports.adicionarItem_Pedido = (req, res) => {
     }
     db.query('INSERT INTO produto SET = ?', novoItem_Pedido, (err, result) => {
         if (err) {
-            console.error('Erro ao adicionar item:', err);
+            console.error('Erro ao $adicionar item:', err);
             res.status(500).json({ error: 'Erro interno do servidor' })
             return;
         }
