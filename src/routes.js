@@ -34,13 +34,15 @@ router.get('/produto/:id_produto',produtoController.buscarProdutoID)
 
 router.get('/produto/nome/:nome_produto', produtoController.buscarProdutoNome)
 
+router.patch('/produto/:id_produto',produtoController.atualizarProduto)
+
 router.post('/produto',produtoController.adicionarProduto)
 
-router.delete('/produto/:id_produto',loginController.autenticarToken,produtoController.deletarProduto)
+router.delete('/produto/:id_produto',produtoController.deletarProduto)
 
-router.use('/pedido',loginController.autenticarToken)
+// router.use('/pedido',loginController.autenticarToken)
 
-router.get('/pedido', pedidoController.buscarpedidoID)
+router.get('/pedido', pedidoController.listaPedido)
 
 router.get('/pedido/:id_pedido', pedidoController.buscarpedidoID)
 
@@ -48,9 +50,9 @@ router.get('/pedido/cliente/:id_cliente', pedidoController.buscarPedidoCliente)
 
 router.post('/pedido',pedidoController.adicionarPedido)
 
-router.patch('/pedido',pedidoController.atualizarPedido)
+router.patch('/pedido/id_pedido',pedidoController.atualizarPedido)
 
-router.patch('/pedido',pedidoController.deletarPedido)
+router.delete('/pedido',pedidoController.deletarPedido)
 
 router.use('/item',loginController.autenticarToken)
 

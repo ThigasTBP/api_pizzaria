@@ -79,7 +79,7 @@ exports.adicionarProduto = (req, res) => {
 exports.atualizarProduto = (req, res) => {
     const { id_produto } = req.params;
     const { nome_produto, descricao, valor_unitario, imagem } = req.body;
-    const { error } = produtoSchema.validate({ nome_produto, descricao, valor_unitario, imagem })
+    const { error } = produtoSchema.validate({ id_produto, nome_produto, descricao, valor_unitario, imagem })
 
     if (error) {
         res.status(400).json({ error: 'Dados de produtos inválidos' });
